@@ -5,6 +5,12 @@ steps:
   - name: node
     entrypoint: npm
     args: ["run", "build"]
-  - name: node
-    entrypoint: serve
-    args: ["-l", "8080", "-s", "build"]
+  - name: gcr.io/buildpacks/builder
+    args: ["cd", "build"]
+  - name: gcr.io/buildpacks/builder
+    args:
+      [
+        "pack",
+        "build",
+        "gcr.io/radiant-oven-362122/github.com/areaewhy/lunchbox:$COMMIT_SHA",
+      ]
