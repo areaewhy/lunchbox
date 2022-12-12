@@ -6,12 +6,16 @@ export default function Clock() {
 
   useEffect(() => {
     console.log("render");
+    
+    var now = new Date().toLocaleString();
+    setDate(now);
 
     interval.current = setInterval(() => {
       console.log("tick");
       var now = new Date().toLocaleString();
       setDate(now);
     }, 1000);
+    
     return () => {
       console.log("teardown");
       clearInterval(interval.current);
